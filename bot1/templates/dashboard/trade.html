@@ -1,0 +1,168 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://s3.tradingview.com/tv-static/light/1.11.3/static/all.css">
+    <style>
+        body {
+            /* Maintain the existing background styling */
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .tradingview-widget-container {
+            width: 100%; /* or specify a fixed width */
+            margin: 0 auto; /* to center the container */
+            display: flex;
+            justify-content: center;
+        }
+        .buy-button {
+            background-color: #22ab94; /* Green color */
+            color: white;
+            padding: 25px;
+            text-decoration: none;
+            border-radius: 15px;
+            margin-top: 10px;
+            display: inline-block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        /* Style for the Sell button */
+        .sell-button {
+            background-color: #f7525f; /* Blue color */
+            color: white;
+            padding: 25px;
+            text-decoration: none;
+            border-radius: 15px;
+            margin-top: 10px;
+            display: inline-block;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        h1 {
+            font-size: 50px; /* Adjust font size as needed */
+            margin-bottom: 10px; /* Add bottom margin for separation */
+            color: #2962FF;
+        }
+    </style>
+</head>
+<body>
+    <h1>TradeVistaProBot</h1>
+        <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+        {
+        "symbols": [
+            [
+            "BINANCE:BTCUSD|1D"
+            ],
+            [
+            "BINANCE:ETHUSD|1D"
+            ]
+        ],
+        "chartOnly": false,
+        "width": 550,
+        "height": 400,
+        "locale": "en",
+        "colorTheme": "dark",
+        "autosize": false,
+        "showVolume": false,
+        "showMA": false,
+        "hideDateRanges": false,
+        "hideMarketStatus": false,
+        "hideSymbolLogo": false,
+        "scalePosition": "right",
+        "scaleMode": "Normal",
+        "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+        "fontSize": "10",
+        "noTimeScale": false,
+        "valuesTracking": "1",
+        "changeMode": "price-and-percent",
+        "chartType": "candlesticks",
+        "maLineColor": "#2962FF",
+        "maLineWidth": 1,
+        "maLength": 9,
+        "lineType": 0,
+        "dateRanges": [
+            "1d|1",
+            "1m|30",
+            "3m|60",
+            "12m|1D",
+            "60m|1W",
+            "all|1M"
+        ],
+        "upColor": "#22ab94",
+        "downColor": "#f7525f",
+        "borderUpColor": "#22ab94",
+        "borderDownColor": "#f7525f",
+        "wickUpColor": "#22ab94",
+        "wickDownColor": "#f7525f"
+        }
+        </script>
+       
+        </div>
+        <a href="{% url "plan"%}" class="buy-button">Buy</a>
+        <a href="{% url "plan"%}" class="sell-button">Sell</a>
+        
+        {% comment %} <!-- TradingView Widget END -->
+        <div class="tradingview-widget-container">
+            <div class="tradingview-widget-container__widget"></div>
+            <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+            {
+            "symbols": [
+            [
+                "BINANCE:BTCUSD|1D"
+            ],
+            [
+                "BINANCE:ETHUSD|1D"
+            ]
+            ],
+            "chartOnly": false,
+            "width": 550,
+            "height": 400,
+            "locale": "en",
+            "colorTheme": "dark",
+            "autosize": false,
+            "showVolume": false,
+            "showMA": false,
+            "hideDateRanges": false,
+            "hideMarketStatus": false,
+            "hideSymbolLogo": false,
+            "scalePosition": "right",
+            "scaleMode": "Normal",
+            "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+            "fontSize": "10",
+            "noTimeScale": false,
+            "valuesTracking": "1",
+            "changeMode": "price-and-percent",
+            "chartType": "candlesticks",
+            "maLineColor": "#2962FF",
+            "maLineWidth": 1,
+            "maLength": 9,
+            "lineType": 0,
+            "dateRanges": [
+            "1d|1",
+            "1m|30",
+            "3m|60",
+            "12m|1D",
+            "60m|1W",
+            "all|1M"
+            ],
+            "upColor": "#22ab94",
+            "downColor": "#f7525f",
+            "borderUpColor": "#22ab94",
+            "borderDownColor": "#f7525f",
+            "wickUpColor": "#22ab94",
+            "wickDownColor": "#f7525f"
+        }
+            </script>
+            
+        </div>
+        <a href="#" class="buy-button">Buy</a>
+        <a href="#" class="sell-button">Sell</a> {% endcomment %}
+        
+
+</body>
+</html>
