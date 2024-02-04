@@ -23,5 +23,5 @@ drf-spectacular==0.26.5
 Pillow==10.0.1
 setuptools==69.0.3
 
-# psycopg2-binary
+psycopg2-binary
 # mysqlclient
