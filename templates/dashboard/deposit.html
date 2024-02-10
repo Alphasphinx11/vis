@@ -25,6 +25,10 @@
           {% csrf_token %}
             <div class="w-full p-8 max-w-sm text-center bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <h5 class="mb-2 text-3xl font-bold text-gray-900 dark:text-white">Bitcoin Deposit</h5>
+                <div class="mb-4">
+                  <label for="amount" class="block text-gray-700 dark:text-gray-400">Amount in $:</label>
+                  <input required type="number" id="amount" name="amount" class="w-full px-3 py-2 placeholder-gray-300 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 dark:bg-gray-700 dark:text-gray-300 dark:placeholder-gray-500 dark:border-gray-600 dark:focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:ring-opacity-50">
+              </div>
                 <p class="mb-5 text-base text-gray-500 sm:text-lg dark:text-gray-400">Your deposit wallet address:</p>
                 
               
@@ -47,17 +51,19 @@
                               
                               </button>
                         </div>
+                       
 
                         <div class="text-sm text-gray-500 mt-4">
                           <p>Please use the above wallet address for your deposits.</p>
-                          <p class= "mb-5">Important: Ensure you double-check the wallet address before making a deposit.</p>
-                          <p>Once deposit is complete click the button below to verify deposit </p>
+                          <p class= "mb-5 text-red-600">Important: Ensure you double-check the wallet address before making a deposit.</p>
+                          <p class="mb-4">Once deposit is complete click the button below to verify deposit </p>
                       </div>
-                      <button type = "submit" name ="button">
-                        <a href="{% url 'signin'%}" class="inline-flex items-center text-purple-600 justify-center w-full px-5 py-3 mb-2 mr-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                      <div class= "items-center">
+                        <button type = "submit" name ="button" class="inline-flex items-center text-purple-600 justify-center w-full px-5 py-3 mb-2 mr-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
                           I have sent it
-                        </a>
-                      </button>
+                        </button>
+                      </div>
+                      
 
                 </div>
             </div>

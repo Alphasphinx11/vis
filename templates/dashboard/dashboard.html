@@ -1,5 +1,21 @@
 {% extends "layouts/base.html"%}
 {% load static %}
+{% block messages %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="flex items-center p-4 text-sm rounded-lg dark:bg-gray-800 {{message.tags}}" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>{{ message }}</div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+{% endblock messages %}
 {% block content %}
 
 <div class="mt-6 p-4">
@@ -8,7 +24,7 @@
             <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Wallet Balance</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">$2000</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">${{ user_wallet.wallet_balance }}</p>
                 </a>
         </div>
        
@@ -17,22 +33,22 @@
             <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Referral Balance</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">$200</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">${{ user_wallet.referral_balance }}</p>
                 </a>
         </div>
         <div class="mb-10">
             <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Trade Balance</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">$2000</p>
+                <p class="font-normal text-gray-700 dark:text-gray-400">${{ user_wallet.trade_balance }}</p>
                 </a>
         </div>
 
         <div class="mb-10">
             <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
     
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Refferal Link</h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">$2000</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Referral Link</h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ user_wallet.referral_link }}</p>
                 </a>
         </div>
 

@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.core.validators import MinValueValidator
+from django.contrib.auth.decorators import login_required
+
 
 class walletsettings(models.Model):
     default_deposit_wallet = models.CharField(max_length= 150, default= "8e00r18393111182840847fihkjle")
@@ -8,24 +13,49 @@ class walletsettings(models.Model):
 
 class wallet(models.Model):
     user = models.OneToOneField(User, on_delete= models.CASCADE)
-    wallet_balance= models.DecimalField(default= 0.0, max_digits= 50, decimal_places= 6)
-    referral_balance = models.DecimalField(default = 0.0, max_digits= 50, decimal_places= 6)
-    trade_balance = models.DecimalField(default= 0.0, max_digits= 50, decimal_places= 6)
-    profit_balance = models.DecimalField(default= 0.0, max_digits= 50, decimal_places= 6)
-    referral_link = models.CharField(max_length= 100)
+    wallet_balance= models.DecimalField(default= 0.0, max_digits= 50, decimal_places= 2)
+    referral_balance = models.DecimalField(default = 0.0, max_digits= 50, decimal_places= 2)
+    trade_balance = models.DecimalField(default= 0.0, max_digits= 50, decimal_places= 2)
+    profit_balance = models.DecimalField(default= 0.0, max_digits= 50, decimal_places= 2)
+    referral_link = models.CharField(max_length=10, null=True, blank=True)
 
-    def verify_transaction(self):
-        # Placeholder for verification logic
-        self.deposit_verified = True
-        self.save()
+    @receiver(post_save, sender=User)
+    def create_user_wallet(sender, instance, created, **kwargs):
+        if created:
+            # Create a wallet for the newly created user
+            wallet.objects.create(user=instance)
 
-    def deposit(self, amount):
-        # Placeholder for deposit logic
-        if not self.deposit_verified:
-            return
 
-        self.wallet_balance += amount
-        self.save()
+
+class Deposit(models.Model):
+    PENDING = 'pending'
+    APPROVED = 'approved'
+    REJECTED = 'rejected'
+    STATUS_CHOICES = [
+        (PENDING, 'Pending'),
+        (APPROVED, 'Approved'),
+        (REJECTED, 'Rejected'),
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    wallet = models.ForeignKey(wallet, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
+    
+    def approve_deposit(self):
+        if self.status == self.APPROVED:
+            # Retrieve the user associated with the deposit
+            user = self.user
+            
+            # Check if the user has a wallet
+            if user and hasattr(user, 'wallet'):
+                user_wallet = user.wallet
+                user_wallet.wallet_balance += self.amount
+                user_wallet.save()
+                
+                # Reset status to pending after updating balance
+            self.save()    
+
+
 
     def withdraw(self, amount):
         # Placeholder for withdrawal logic
@@ -52,12 +82,39 @@ class wallet(models.Model):
     def __str__(self):
         return f"Wallet for {self.user.username}"
 
-    def generate_referral_link(self):
-        website_name = "your_website_name"  # Replace with your actual website name
-        uuid_suffix = str(uuid.uuid4())[:8]  # Use the first 8 characters of the UUID
-        return f"http://{website_name}/signup?ref={self.referral_code}-{uuid_suffix}"
+class Withdrawal(models.Model):
+    PENDING = 'pending'
+    APPROVED = 'approved'
+    REJECTED = 'rejected'
+    STATUS_CHOICES = [
+        (PENDING, 'Pending'),
+        (APPROVED, 'Approved'),
+        (REJECTED, 'Rejected'),
+    ]
+    user= models.ForeignKey(User, on_delete=models.CASCADE)
+    wallet= models.ForeignKey(wallet, on_delete= models.CASCADE)
+    amount = models.CharField(max_length=50)
+    walletAddress=models.CharField(max_length=200, null= True, blank =True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
+
+    def verify_transaction(self):
+        # Placeholder for verification logic
+        self.status = self.APPROVED
+        self.save()
+
+        if self.status == self.APPROVED:
+            # Update wallet balance upon approval
+            self.wallet.wallet_balance += float(self.amount)
+            self.wallet.save()
+
     
-    def save(self, *args, **kwargs):
-        if not self.referral_code:
-            self.referral_code = "100595856" 
-        super().save(*args, **kwargs)
+
+    # def generate_referral_link(self):
+    #     website_name = "your_website_name"  # Replace with your actual website name
+    #     uuid_suffix = str(uuid.uuid4())[:8]  # Use the first 8 characters of the UUID
+    #     return f"http://{website_name}/signup?ref={self.referral_code}-{uuid_suffix}"
+    
+    # def save(self, *args, **kwargs):
+    #     if not self.referral_code:
+    #         self.referral_code = "100595856" 
+    #     super().save(*args, **kwargs)
