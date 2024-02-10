@@ -109,10 +109,10 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DB_ENGINE   = os.getenv('DB_ENGINE'   , 'postgresql')
 DB_USERNAME = os.getenv('DB_USERNAME' , 'admin')
-DB_PASS     = os.getenv('DB_PASS'     , '1ubnMGADRJvkdLWoLmDi1kDGj5bwugTN')
-DB_HOST     = os.getenv('DB_HOST'     , 'dpg-cmvj04acn0vc73ap3va0-a.frankfurt-postgres.render.com')
+DB_PASS     = os.getenv('DB_PASS'     , 'eTF2nkROCEeOd6n6x1uIcsuvMpFIOjm1')
+DB_HOST     = os.getenv('DB_HOST'     , 'dpg-cn3f4cv109ks73epn2b0-a.frankfurt-postgres.render.com')
 DB_PORT     = os.getenv('DB_PORT'     , '5432')
-DB_NAME     = os.getenv('DB_NAME'     , 'vistaprobotdb')
+DB_NAME     = os.getenv('DB_NAME'     , 'vistaprobotdb_qq85')
 
 # DB_ENGINE   = os.getenv('DB_ENGINE'   , None)
 # DB_USERNAME = os.getenv('DB_USERNAME' , None)
