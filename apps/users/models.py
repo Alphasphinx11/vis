@@ -21,3 +21,24 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+    
+ID_TYPE_CHOICES = [
+        ('drivers_license', 'Drivers_License'),
+        ('Passport', 'Passport'),
+        ('id_card', 'ID_CARD'),
+        #('done', 'Done'),
+    ]
+
+
+class Kyc(models.Model):
+    user  = models.OneToOneField(User, on_delete=models.CASCADE)
+    id_type = models.CharField(max_length = 50, choices=ID_TYPE_CHOICES, default= "Passport")
+    pic    = models.ImageField(upload_to='Kycs', null=True, blank=True)
+    selfie = models.ImageField(upload_to='selfies', null=True, blank=True)
+    verified = models.BooleanField(default= False)
+
+
+    def verify_kyc():
+        pass
+
+    

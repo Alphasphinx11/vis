@@ -3,131 +3,569 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="https://s3.tradingview.com/tv-static/light/1.11.3/static/all.css">
     <style>
-        body {
-            /* Maintain the existing background styling */
-            background-color: #f8f9fa; /* Light gray background */
-        }
-        .tradingview-widget-container {
-            width: 100%; /* or specify a fixed width */
-            margin: 0 auto; /* to center the container */
-            display: flex;
-            justify-content: center;
-        }
-        .buy-button {
-            background-color: #22ab94; /* Green color */
-            color: white;
-            padding: 25px;
-            text-decoration: none;
-            border-radius: 15px;
-            margin-top: 10px;
-            display: inline-block;
-            margin: 0 auto;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        /* Style for the Sell button */
-        .sell-button {
-            background-color: #f7525f; /* Blue color */
-            color: white;
-            padding: 25px;
-            text-decoration: none;
-            border-radius: 15px;
-            margin-top: 10px;
-            display: inline-block;
-            margin: 0 auto;
-            margin-bottom: 20px;
-            width: 100%;
+      body {
+        background-color: #f8f9fa; /* Light gray background */
+    }
+    
+    .chart-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between; /* Adjust spacing between charts */
+        padding: 20px; /* Add padding for better spacing */
+    }
+    h1 {
+      font-size: 50px; /* Default font size */
+      margin-bottom: 10px; /* Add bottom margin for separation */
+      color: #2962FF;
+    }
+    
+    .chart {
+        width: calc(50% - 20px); /* Two charts per row on large screens */
+        margin-bottom: 10px;
+        background-color: #fff; /* White background for each chart */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Add shadow for better visual separation */
+        border-radius: 8px; /* Add border radius for rounded corners */
+    }
+    
+    @media (min-width: 768px) {
+        .chart {
+            width: calc(33.33% - 20px); /* Three charts per row on large screens */
         }
         h1 {
-            font-size: 50px; /* Adjust font size as needed */
-            margin-bottom: 10px; /* Add bottom margin for separation */
-            color: #2962FF;
-        }
+          font-size: 70px; /* Larger font size on big screens */
+      }
+    }
+    
+    .chart-canvas {
+        width: 100%;
+        border-top-left-radius: 8px; /* Ensure rounded corners for the chart canvas */
+        border-top-right-radius: 8px;
+    }
+    
+    .buy-button,
+    .sell-button {
+        display: block;
+        width: 100%;
+        text-align: center; /* Center align buttons */
+        padding: 10px 0; /* Add padding for better button appearance */
+        background-color: #22ab94; /* Green background for buy button */
+        color: #fff; /* White text color */
+        text-decoration: none; /* Remove default link underline */
+        border-bottom-left-radius: 8px; /* Ensure rounded corners for the buttons */
+        border-bottom-right-radius: 8px;
+        margin-bottom: 10px;
+    }
+    
+    .sell-button {
+        background-color: #f7525f; /* Red background for sell button */
+        margin-bottom: 20px;
+    }
+    
     </style>
 </head>
 <body>
     <h1>TradeVistaProBot</h1>
+
+    <div class= "chart-container">
+      <div id="chart">
         <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-        {
-            "symbols": [
-            [
-              "BINANCE:BTCUSD|1D"
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+                "BINANCE:BTCUSD|1D"
+              ]
             ],
-            [
-              "BINANCE:ETHUSD|1D"
-            ],
-            [
-              "BINANCE:BNBUSDT|1D"
-            ],
-            [
-              "FOREXCOM:XAUUSD|1D"
-            ],
-            [
-              "BINANCE:XRPUSDT|1D"
-            ],
-            [
-              "FOREXCOM:GBPUSD|1D"
-            ],
-            [
-              "BINANCE:TRXUSD|1D"
-            ],
-            [
-              "FOREXCOM:EURUSD|1D"
-            ],
-            [
-              "FX_IDC:JPYUSD|1D"
-            ],
-            [
-              "FOREXCOM:AUDUSD|1D"
-            ]
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
           ],
-        "chartOnly": false,
-        "width": 550,
-        "height": 400,
-        "locale": "en",
-        "colorTheme": "dark",
-        "autosize": false,
-        "showVolume": false,
-        "showMA": false,
-        "hideDateRanges": false,
-        "hideMarketStatus": false,
-        "hideSymbolLogo": false,
-        "scalePosition": "right",
-        "scaleMode": "Normal",
-        "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
-        "fontSize": "10",
-        "noTimeScale": false,
-        "valuesTracking": "1",
-        "changeMode": "price-and-percent",
-        "chartType": "candlesticks",
-        "maLineColor": "#2962FF",
-        "maLineWidth": 1,
-        "maLength": 9,
-        "lineType": 0,
-        "dateRanges": [
-            "1d|1",
-            "1m|30",
-            "3m|60",
-            "12m|1D",
-            "60m|1W",
-            "all|1M"
-        ],
-        "upColor": "#22ab94",
-        "downColor": "#f7525f",
-        "borderUpColor": "#22ab94",
-        "borderDownColor": "#f7525f",
-        "wickUpColor": "#22ab94",
-        "wickDownColor": "#f7525f"
-        }
-        </script>
-       
-        </div>
-        <a href="{% url "plan"%}" class="buy-button">Buy</a>
-        <a href="{% url "plan"%}" class="sell-button">Sell</a>
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+      <div id="chart">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+                "BINANCE:ETHUSD|1D"
+              ]
+            ],
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
+          ],
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+      <div id="chart">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+                "FOREXCOM:XAUUSD|1D"
+              ]
+            ],
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
+          ],
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+      <div id="chart">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+                "FOREXCOM:GBPUSD|1D"
+              ]
+            ],
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
+          ],
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+      <div id="chart">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+                "FOREXCOM:AUDUSD|1D"
+              ]
+            ],
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
+          ],
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+      <div id="chart">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+              "FX_IDC:JPYUSD|1D"
+              ]
+            ],
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
+          ],
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+      <div id="chart1">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+                "FOREXCOM:NZDUSD|1D"
+              ]
+            ],
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
+          ],
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+      <div id="chart">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+                "FOREXCOM:EURAUD|1D"
+              ]
+            ],
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
+          ],
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+      <div id="chart">
+        <div class="tradingview-widget-container">
+          <div class="tradingview-widget-container__widget"></div>
+          <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text"></span></a></div>
+          <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+          {
+              "symbols": [
+              [
+                "FOREXCOM:EURGBP|1D"
+              ]
+            ],
+          "chartOnly": false,
+          "width": 300,
+          "height": 300,
+          "locale": "en",
+          "colorTheme": "dark",
+          "autosize": false,
+          "showVolume": false,
+          "showMA": false,
+          "hideDateRanges": false,
+          "hideMarketStatus": false,
+          "hideSymbolLogo": false,
+          "scalePosition": "right",
+          "scaleMode": "Normal",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, Trebuchet MS, Roboto, Ubuntu, sans-serif",
+          "fontSize": "10",
+          "noTimeScale": false,
+          "valuesTracking": "1",
+          "changeMode": "price-and-percent",
+          "chartType": "candlesticks",
+          "maLineColor": "#2962FF",
+          "maLineWidth": 1,
+          "maLength": 9,
+          "lineType": 0,
+          "dateRanges": [
+              "1d|1",
+              "1m|30",
+              "3m|60",
+              "12m|1D",
+              "60m|1W",
+              "all|1M"
+          ],
+          "upColor": "#22ab94",
+          "downColor": "#f7525f",
+          "borderUpColor": "#22ab94",
+          "borderDownColor": "#f7525f",
+          "wickUpColor": "#22ab94",
+          "wickDownColor": "#f7525f"
+          }
+          </script>
+         
+          </div>
+          <a href="{% url "execute"%}" class="buy-button">Buy</a>
+          <a href="{% url "execute"%}" class="sell-button">Sell</a>
+      </div>
+    </div>
+
+    
+        
         
         {% comment %} <!-- TradingView Widget END -->
         <div class="tradingview-widget-container">
@@ -183,7 +621,7 @@
         }
             </script>
             
-        </div>
+        
         <a href="#" class="buy-button">Buy</a>
         <a href="#" class="sell-button">Sell</a> {% endcomment %}
         <!-- TradingView Widget BEGIN -->

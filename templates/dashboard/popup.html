@@ -1,0 +1,66 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class= "p-12">
+  <div class="text-center">
+    <h3 class="text-lg font-medium text-gray-900 mb-4">Execute Trade</h3>
+    <!-- Trade form goes here -->
+    <form id="tradeForm" method="post">
+      {% csrf_token %}
+      <!-- Symbol -->
+      <div class="mb-4">
+        <label for="symbol" class="block text-sm font-medium text-white">Symbol</label>
+        <select name="symbol" id="symbol" class="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+          <option value="audusd">AUDUSD</option>
+          <option value="btcusd">BTCUSD</option>
+          <option value="ethusd">ETHUSD</option>
+          <option value="euraud">EURAUD</option>
+          <option value="eurgbp">EURGBP</option>
+          <option value="gbpusd">GBPUSD</option>
+          <option value="jpyusd">JPYUSD</option>
+          <option value="nzdusd">NZDUSD</option>
+          <option value="xauusd">XAUUSD</option>
+        </select>
+      </div>
+      <!-- Amount -->
+      <div class="mb-4">
+        <label for="amount" class="block text-sm font-medium text-white">Amount</label>
+        <input type="number" min="1000" max="10000"  name="amount" id="amount" class="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <!-- Type -->
+      <div class="mb-4">
+        <label for="type" class="block text-sm font-medium text-white">Type</label>
+        <select name="type" id="type" class="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+          <option value="buy">BUY</option>
+          <option value="sell">SELL</option>
+        </select>
+      </div>
+      <!-- Lot Size -->
+      <div class="mb-4">
+        <label for="lot_size" class="block text-sm font-medium text-white">Lot Size</label>
+        <input type="number" name="lot_size" min="1" max="5" id="lot_size" class="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+      </div>
+      <!-- Duration -->
+      <div class="mb-4">
+        <label for="duration" class="block text-sm font-medium text-white">Duration</label>
+        <select name="duration" id="duration" class="mt-1 p-2 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+          <option value="30 minutes">30 MINUTES</option>
+          <option value="40 minutes">40 MINUTES</option>
+          <option value="1 hour">1 HOUR</option>
+          <option value="4 hours">4 HOURS</option>
+          <option value="8 hours">8 HOURS</option>
+          <option value="16 hours">16 HOURS</option>
+          <option value="1 day">1 DAY</option>
+        </select>
+      <div class="flex justify-center mt-5">
+        <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          Execute Trade
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+ 
+{% endblock %}
+
+  

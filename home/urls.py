@@ -11,4 +11,7 @@ urlpatterns = [
     path("trade/", views.trade, name= "trade"),
     path("plan/", views.plan, name= "plan"),
     path("transfer/", views.transfer, name= "transfer"),
+    path("kyc_submit/", views.kyc_verification, name= "kyc"),
+    path("execute/", views.execute_trade, name= "execute"),
+    path("trade_history/", views.trade_history, name= "trade_history"),
 ]

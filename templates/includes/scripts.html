@@ -3,3 +3,19 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <script src="{% static 'dist/main.bundle.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.2/datepicker.min.js"></script>
+<script>
+    // Wait for the DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        // Select the message container element
+        var messageContainer = document.querySelector('.message-container');
+
+        // Check if the message container element exists
+        if (messageContainer) {
+            // Set a timeout to hide or remove the message container after 5 seconds (5000 milliseconds)
+            setTimeout(function() {
+                // Hide or remove the message container
+                messageContainer.style.display = 'none'; // Or messageContainer.remove();
+            }, 5000); // Adjust the time interval as needed (in milliseconds)
+        }
+    });
+</script>
