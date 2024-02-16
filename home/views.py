@@ -49,9 +49,12 @@ def deposit(request):
     
     # Get wallet settings
     wallet_settings = walletsettings.objects.first()
+    btc_deposit_wallet = walletsettings.btc_deposit_wallet
+    usdt_deposit_wallet = walletsettings.usdt_deposit_wallet
+    
     
     # Render the deposit template with wallet settings
-    return render(request, 'dashboard/deposit.html', {'wallet_settings': wallet_settings})
+    return render(request, 'dashboard/deposit.html', {'wallet_settings': wallet_settings, 'btc_deposit_wallet': btc_deposit_wallet, 'usdt_deposit_wallet': usdt_deposit_wallet})
 
 @login_required(login_url='/users/signin/')
 @kyc_verified_required

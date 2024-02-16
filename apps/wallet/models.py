@@ -8,7 +8,8 @@ from django.contrib.auth.decorators import login_required
 
 
 class walletsettings(models.Model):
-    default_deposit_wallet = models.CharField(max_length= 150, default= "8e00r18393111182840847fihkjle")
+    btc_deposit_wallet = models.CharField(max_length= 150, default= "8e00r18393111182840847fihkjle")
+    usdt_deposit_wallet = models.CharField(max_length= 150, default= "8e00r18393111182840847fihkjle")
 
 
 class wallet(models.Model):
