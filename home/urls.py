@@ -14,4 +14,5 @@ urlpatterns = [
     path("kyc_submit/", views.kyc_verification, name= "kyc"),
     path("execute/", views.execute_trade, name= "execute"),
     path("trade_history/", views.trade_history, name= "trade_history"),
+    path("privacy/", views.privacy, name= "privacy"),
 ]

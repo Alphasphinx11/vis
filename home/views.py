@@ -34,6 +34,9 @@ def dashboard(request):
 def trade(request):
     return render(request, "dashboard/trade.html")
 
+def privacy(request):
+    return render(request, "dashboard/privacy_policy.html")
+
 @login_required(login_url='/users/signin/')
 @kyc_verified_required
 def deposit(request):
