@@ -59,7 +59,7 @@ def create_token(sender, instance, created, **kwargs):
             html_message = render_to_string('authentication/email_verification.html', {
                 'username': instance.username,
                 'otp_code': otp.otp_code,
-                'verification_url': f'http://127.0.0.1:8000/users/verify-email/{instance.username}',
+                'verification_url': f'https://vis-kxlh.onrender.com/users/verify-email/{instance.username}',
             })
 
             # Strip HTML tags to generate text content
