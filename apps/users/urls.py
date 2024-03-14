@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path('signin/', views.SignInView.as_view(), name="signin"),
-    path('signup/', views.SignUpView.as_view(), name="signup"),
+    path('signup/', views.signup, name="signup"),
     path('signout/', views.signout_view, name="signout"),
     # path('password-change/', views.UserPasswordChangeView.as_view(), name='password_change'),
     # path('password-change-done/', auth_views.PasswordChangeDoneView.as_view(
@@ -31,4 +31,6 @@ urlpatterns = [
     path('delete-user/<int:id>/', views.delete_user, name="delete_user"),
     path('update-user/<int:id>/', views.update_user, name="update_user"),
     path('user-change-password/<int:id>/', views.user_change_password, name="user_change_password"),
+    path("verify-email/<slug:username>", views.verify_email, name="verify-email"),
+    path("resend-otp", views.resend_otp, name="resend-otp"),
 ]

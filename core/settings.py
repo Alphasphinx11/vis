@@ -119,10 +119,10 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 DB_ENGINE   = os.getenv('DB_ENGINE'   , 'postgresql')
 DB_USERNAME = os.getenv('DB_USERNAME' , 'admin')
-DB_PASS     = os.getenv('DB_PASS'     , 'eTF2nkROCEeOd6n6x1uIcsuvMpFIOjm1')
-DB_HOST     = os.getenv('DB_HOST'     , 'dpg-cn3f4cv109ks73epn2b0-a.frankfurt-postgres.render.com')
+DB_PASS     = os.getenv('DB_PASS'     , 'ibPaclf4Igi7VsFdGdUCYtXbgM3BOkJD')
+DB_HOST     = os.getenv('DB_HOST'     , 'dpg-cnpbstmn7f5s73c48n3g-a.frankfurt-postgres.render.com')
 DB_PORT     = os.getenv('DB_PORT'     , '5432')
-DB_NAME     = os.getenv('DB_NAME'     , 'vistaprobotdb_qq85')
+DB_NAME     = os.getenv('DB_NAME'     , 'vistaprobotdb_wnkx')
 
 # DB_ENGINE   = os.getenv('DB_ENGINE'   , None)
 # DB_USERNAME = os.getenv('DB_USERNAME' , None)
@@ -153,6 +153,8 @@ else:
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
+    
+AUTH_USER_MODEL = 'users.CustomUser'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -231,12 +233,13 @@ LOGIN_REDIRECT_URL = '/'
 
 
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-# EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
-# EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', True)
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER',)
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 465)
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', True)
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', False)
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'forexadim@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'cbxshoxiqkbvebww')
 
 # ### API-GENERATOR Settings ###
 API_GENERATOR = {

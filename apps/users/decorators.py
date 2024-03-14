@@ -23,3 +23,10 @@ def kyc_verified_required(view_func):
         return view_func(request, *args, **kwargs)
     
     return _wrapped_view
+
+def email_verified_required(view_func):
+    def email_wrapped_view(request, *args, **kwargs):
+        try:
+            pass
+        except:
+            pass

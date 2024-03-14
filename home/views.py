@@ -3,11 +3,15 @@ from django.contrib.auth.decorators import login_required
 from apps.wallet.models import walletsettings, wallet, Withdrawal, Deposit
 from django.contrib import messages
 from django.contrib.auth.models import User
+from apps.users.models import CustomUser
 from decimal import Decimal 
 from apps.users.decorators import kyc_verified_required
 from apps.users.models import Kyc
+from django.contrib.auth import get_user_model
 
 from .models import *
+
+CustomUser = get_user_model()
 
 def index(request):
 
@@ -78,7 +82,9 @@ def withdrawal(request):
             messages.error(request, 'Insufficient funds for withdrawal.')
             return redirect('dashboard')  # Redirect to dashboard or wherever appropriate
         
-        user_wallet.wallet_balance -= total_amount
+        user_wallet.wallet_balance -= (total_amount + withdrawal_charges)
+        
+
         user_wallet.save()
         # Save withdrawal request
         withdrawal_request = Withdrawal.objects.create(

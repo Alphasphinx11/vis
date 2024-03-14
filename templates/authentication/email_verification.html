@@ -1,0 +1,18 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Verification</title>
+</head>
+<body>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #333;">Email Verification</h2>
+        <p>Hello {{ username }},</p>
+        <p>Here is your OTP code: <strong>{{ otp_code }}</strong></p>
+        <p>It expires in 5 minutes. Please use the following URL to verify your email:</p>
+        <p><a href="{{ verification_url }}">Verify Email</a></p>
+        <p>If you did not request this verification, please ignore this email.</p>
+        <p>Thank you!</p>
+    </div>
+</body>
+</html>

@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.validators import MinValueValidator
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 
 class walletsettings(models.Model):
@@ -13,7 +14,7 @@ class walletsettings(models.Model):
 
 
 class wallet(models.Model):
-    user = models.OneToOneField(User, on_delete= models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete= models.CASCADE)
     wallet_balance= models.DecimalField(default= 0.0, max_digits= 50, decimal_places= 2)
     referral_balance = models.DecimalField(default = 0.0, max_digits= 50, decimal_places= 2)
     trade_balance = models.DecimalField(default= 0.0, max_digits= 50, decimal_places= 2)
@@ -37,7 +38,7 @@ class Deposit(models.Model):
         (APPROVED, 'Approved'),
         (REJECTED, 'Rejected'),
     ]
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     wallet = models.ForeignKey(wallet, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0)])
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
@@ -92,7 +93,7 @@ class Withdrawal(models.Model):
         (APPROVED, 'Approved'),
         (REJECTED, 'Rejected'),
     ]
-    user= models.ForeignKey(User, on_delete=models.CASCADE)
+    user= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     wallet= models.ForeignKey(wallet, on_delete= models.CASCADE)
     amount = models.CharField(max_length=50)
     walletAddress=models.CharField(max_length=200, null= True, blank =True)

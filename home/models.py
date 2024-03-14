@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
@@ -41,7 +42,7 @@ DURATION_CHOICES = [
 ]  
 
 class Trade(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     symbol= models.CharField(max_length = 15, choices= SYMBOL_CHOICES, default = 'xauusd')
     amount = models.CharField(max_length = 15)
     profit = models.CharField(max_length = 15, blank=True)

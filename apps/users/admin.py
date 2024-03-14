@@ -1,7 +1,9 @@
 from django.contrib import admin
-from apps.users.models import Profile, Kyc
+from apps.users.models import Profile, Kyc, CustomUser, OtpToken
 
 # Register your models here.
+admin.site.register(CustomUser)
+admin.site.register(OtpToken)
 
 class KycAdmin(admin.ModelAdmin):
     list_display= ["user", "id_type", "verified"]

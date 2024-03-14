@@ -1,0 +1,46 @@
+{% extends "layouts/base-auth.html" %}
+{% load static %}
+
+
+  {% block extrastyle %}{% endblock extrastyle %}
+
+{% block messages %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="flex items-center p-4 text-sm rounded-lg dark:bg-gray-800 {{message.tags}}" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>{{ message }}</div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+{% endblock messages %}
+
+
+
+{% block content %}
+
+    <div class=" h-full w-full p-6 mt-6">
+        <form action="" method="POST" class="max-w-md mx-auto mt-8">
+            {% csrf_token %}
+            <div class="text-center">
+                <h3 class="text-3xl dark:text-white font-semibold mb-4">Verify Email</h3>
+            </div>
+        
+            <div class="mb-4">
+                <label for="otp_code" class="block dark:text-white text-sm font-medium text-gray-700">OTP</label>
+                <input type="text" name="otp_code" id="otp_code" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="Enter OTP">
+            </div>
+            <button type="submit" class="w-full py-2 px-4 border  border-transparent text-sm font-medium rounded-md dark:text-white  bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Activate Account</button>
+            <p class="mt-2 text-sm text-gray-600">Need a new OTP? <a href="{% url 'resend-otp' %}" class="font-medium dark:text-green-500 text-indigo-600 hover:text-indigo-500">Resend OTP</a></p>
+        </form>
+        
+    </div>
+
+{% endblock content %}
+    

@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UsernameField, PasswordChangeForm, PasswordResetForm, SetPasswordForm
-from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from apps.users.models import Profile
+from apps.users.models import Profile, CustomUser
+
 
 class SigninForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={
@@ -23,7 +23,7 @@ class SigninForm(AuthenticationForm):
 
 class SignupForm(UserCreationForm):
     class Meta:
-        model = User
+        model = CustomUser
         fields = ('username', 'email', )
 
     def __init__(self, *args, **kwargs):

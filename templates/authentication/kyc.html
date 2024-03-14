@@ -8,17 +8,17 @@
 {% block content %}
 <div class= "p-6 max-w-sm">
     <div class="container mx-auto mt-10">
-        <h1 class="text-3xl font-semibold mb-6">KYC Verification</h1>
+        <h1 class="text-3xl dark:text-white font-semibold mb-6">KYC Verification</h1>
         {% if kyc %}
         <div class="mb-4">
-            <p class="text-lg font-semibold">ID Type: {{ kyc.id_type }}</p>
-            <p class="text-lg font-semibold">ID Document:</p>
+            <p class="text-lg dark:text-white font-semibold">ID Type: {{ kyc.id_type }}</p>
+            <p class="text-lg dark:text-white font-semibold">ID Document:</p>
             <img src="{{ kyc.pic.url }}" alt="ID Document" class="max-w-xs">
-            <p class="text-lg font-semibold">Selfie with ID:</p>
+            <p class="text-lg dark:text-white font-semibold">Selfie with ID:</p>
             <img src="{{ kyc.selfie.url }}" alt="Selfie with ID" class="max-w-xs">
         </div>
         {% if kyc.verified %}
-            <p class="text-lg font-semibold text-green-500">Verification: Verified</p>
+            <p class="text-lg  font-semibold text-green-500">Verification: Verified</p>
         {% else %}
             <p class="text-lg font-semibold text-yellow-500">Verification: Pending</p>
         {% endif %}
