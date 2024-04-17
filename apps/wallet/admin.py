@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import walletsettings, Deposit, wallet
+from .models import walletsettings, Deposit, wallet, Withdrawal
 
 class DepositAdmin(admin.ModelAdmin):
     list_display = ('user', 'wallet', 'amount', 'status')
@@ -27,6 +27,22 @@ class DepositAdmin(admin.ModelAdmin):
                 obj.wallet.save()
         super().save_model(request, obj, form, change)
 
+class WithdrawalAdmin(admin.ModelAdmin):
+    list_display = ('user', 'wallet', 'amount', 'walletAddress', 'status')
+    list_filter = ('status',)
+    search_fields = ('user__username', 'amount')
+    actions = ['mark_as_approved']
+
+    def mark_as_approved(self, request, queryset):
+        for withdrawal in queryset:
+            if request.user.is_superuser:  # Ensure the user is admin
+                withdrawal.status = Deposit.APPROVED
+                withdrawal.save()
+                # Update the user's wallet balance
+                withdrawal.wallet.wallet_balance += withdrawal.amount
+                withdrawal.wallet.save()
+    mark_as_approved.short_description = 'Mark selected withdrawals as Approved'
+
 
 
 class WalletAdmin(admin.ModelAdmin):
@@ -38,6 +54,7 @@ admin.site.register(wallet, WalletAdmin)
 
 # Register the DepositAdmin with the Deposit model
 admin.site.register(Deposit, DepositAdmin)
+admin.site.register(Withdrawal, WithdrawalAdmin)
 
 
 
