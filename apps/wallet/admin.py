@@ -38,9 +38,7 @@ class WithdrawalAdmin(admin.ModelAdmin):
             if request.user.is_superuser:  # Ensure the user is admin
                 withdrawal.status = Deposit.APPROVED
                 withdrawal.save()
-                # Update the user's wallet balance
-                withdrawal.wallet.wallet_balance += withdrawal.amount
-                withdrawal.wallet.save()
+                
     mark_as_approved.short_description = 'Mark selected withdrawals as Approved'
 
 
